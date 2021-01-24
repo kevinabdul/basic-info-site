@@ -1,22 +1,38 @@
 const http = require("http");
 const path = require("path");
 const fs = require("fs")
-const home = fs.readFileSync("./index.html", "utf-8");
-const about = fs.readFileSync("./about.html", "utf-8");
-const contactMe = fs.readFileSync("./contact-me.html", "utf-8");
-const notFound = fs.readFileSync("./404.html", "utf-8");
 
 const server = http.createServer((req,res)=> {
 	let url = req.url;
 
 	if (url === `/`) {
-		res.end(home)
+		fs.readFile("./index.html", (err, data)=> {
+			if (err) {
+				console.log(err);
+			}
+			res.end(data)
+		})
 	} else if (url === `/about`) {
-		res.end(about);
+		fs.readFile("./about.html", (err, data)=> {
+			if (err) {
+				console.log(err);
+			}
+			res.end(data)
+		})
 	} else if (url === `/contact-me`) {
-		res.end(contactMe);
+		fs.readFile("./contact-me.html", (err, data)=> {
+			if (err) {
+				console.log(err);
+			}
+			res.end(data)
+		})
 	} else {
-		res.end(notFound);
+		fs.readFile("./404.html", (err, data)=> {
+			if (err) {
+				console.log(err);
+			}
+			res.end(data)
+		})
 	}	
 })
 
